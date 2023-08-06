@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+</head>
+<body>
+
+<div align="center">
+  <form method="POST">
+    <label>Nome Razão</label>
+    <input type="text" name="nomeRazao" />
+    <br>
+    <label>Nome Fantasia</label>
+    <input type="text" name="nomeFantasia" />
+    <br>
+    <label>CNPJ:</label>
+    <input type="text" name="cnpj" />
+    <br>
+    <label>CNAE</label>
+    <input type="text" name="cnae" />
+    <br>
+    <input type="submit" value="Cadastrar" />
+  </form>
+</div>
+
+{% for empresa in empresa %}
+<li>{{empresa.nomeRazao}} - {{empresa.usuario_id}}
+  <ul>
+    {{empresa.cnpj}}
+  </ul>
+  <form method="PUT">
+
+    <ul>
+      <input type="text" name="cnae" value="{{empresa.cnae}}" />
+    </ul>
+    <ul>
+      <input type="text" name="nomefantasia" value="{{empresa.nomeFantasia}}" />
+    </ul>
+
+    <ul>
+      <input name="id" value="{{empresa.id}}" type="hidden" />
+      <input type="submit" value="Atualiar" />
+
+  </form>
+  <form method="DELETE">
+    <input name="id" value="{{empresa.id}}" type="hidden" />
+    <input type="submit" value="Excluir" />
+    <input type="hidden" name="metodo" value="delete" />
+    <input type="hidden" name="cnpj" value="{{empresa.cnpj}}" />
+  </form>
+  </ul>
+</li>
+{% endfor %}
+
+</body>
+</html>
