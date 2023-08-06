@@ -180,6 +180,7 @@ def acoes(id_usuario, id_empresa):
                 {
                     "cnpj": empresas.cnpj,
                     "id": empresas.id,
+                    "usuario": empresas.usuario_id
                 }
                 for empresas in empresas
             ],
@@ -189,10 +190,10 @@ def acoes(id_usuario, id_empresa):
         return jsonify(dados)
 
     elif request.method == 'POST':
-        cnpj = request.form.get('cnpj')
-        cnae = request.form.get('cnae')
-        nome_fantasia = request.form.get('nome_fantasia')
-        nome_razao = request.form.get('nome_razao')
+        cnpj = request.json.get('cnpj')
+        cnae = request.json.get('cnae')
+        nome_fantasia = request.json.get('nome_fantasia')
+        nome_razao = request.json.get('nome_razao')
         resp = EmpresaAcoes.Acoes().criar(id_usuario, cnpj, cnae, nome_fantasia, nome_razao)
         return jsonify(resp)
 
