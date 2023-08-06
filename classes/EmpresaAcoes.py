@@ -59,16 +59,24 @@ class Acoes():
         empresa = Empresa.query.get(id_empresa)
         autorizado = int(empresa.usuario_id)
         if autorizado == id_usuario:
-            empresa.nomeFantasia = nome_fantasia
-            empresa.cnae = cnae
-            db.session.commit()
-            resp = {
-                "status": 'Empresa atualizada com sucesso!',
-                "situacao": 'sucesso',
-                "fantasia": nome_fantasia,
-                "cnae": cnae
-            }
-            return resp
+            try:
+                empresa.nomeFantasia = nome_fantasia
+                empresa.cnae = cnae
+                db.session.commit()
+
+                resp = {
+                    "status": 'Empresa atualizada com sucesso!',
+                    "situacao": 'sucesso',
+                    "fantasia": nome_fantasia,
+                    "cnae": cnae
+                }
+                return resp
+            except Exception as e:
+                resp = {
+                    "status": f'Ocorreu um erro: {e}',
+                    "situacao": 'erro'
+                }
+                return resp
         else:
             resp = {
                 "status": 'Erro, acesso negado!',
