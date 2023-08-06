@@ -62,6 +62,7 @@ class Acoes():
         if autorizado == id_usuario:
             empresa.nomeFantasia = nome_fantasia
             empresa.cnae = cnae
+            empresa.save()
             db.session.commit()
             resp = {
                 "status": 'Empresa atualizada com sucesso!',
