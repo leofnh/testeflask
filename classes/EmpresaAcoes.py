@@ -58,7 +58,7 @@ class Acoes():
     def atualizar(self, id_usuario, id_empresa,cnae, nome_fantasia):
         id = id_empresa
         empresa = Empresa.query.get(id)
-        autorizado = empresa.usuario_id
+        autorizado = int(empresa.usuario_id)
         if autorizado == id_usuario:
             empresa.nomeFantasia = nome_fantasia
             empresa.cnae = cnae
