@@ -71,7 +71,9 @@ class Acoes():
         else:
             resp = {
                 "status": 'Erro, acesso negado!',
-                "situacao": 'erro'
+                "situacao": 'erro',
+                "usuario": id_usuario,
+                "empresa": id_empresa
             }
             return resp
 
