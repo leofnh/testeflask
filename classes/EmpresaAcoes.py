@@ -56,17 +56,17 @@ class Acoes():
             return resp
 
     def atualizar(self, id_usuario, id_empresa,cnae, nome_fantasia):
-        id = id_empresa
-        empresa = Empresa.query.get(id)
+        empresa = Empresa.query.get(id_empresa)
         autorizado = int(empresa.usuario_id)
         if autorizado == id_usuario:
             empresa.nomeFantasia = nome_fantasia
             empresa.cnae = cnae
-            empresa.save()
             db.session.commit()
             resp = {
                 "status": 'Empresa atualizada com sucesso!',
-                "situacao": 'sucesso'
+                "situacao": 'sucesso',
+                "fantasia": nome_fantasia,
+                "cnae": cnae
             }
             return resp
         else:
