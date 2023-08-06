@@ -1,7 +1,7 @@
 from bd.conexao import app, db
 from flask import jsonify, request
 from bd.models import Usuario, Empresa
-from classes import cadastroEmpresa, atualizarEmpresa, removerEmpresa, cadastrarUsuario, EmpresaAcoes
+from funcoes import cadastroEmpresa, atualizarEmpresa, removerEmpresa, cadastrarUsuario, EmpresaAcoes
 
 @app.route('/')
 def home():

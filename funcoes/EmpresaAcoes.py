@@ -8,7 +8,7 @@ class Acoes():
     def excluir(self, id_usuario, id_empresa,cnpj):
         try:
             empresa = Empresa.query.get(id_empresa)
-            autorizado = empresa.usuario_id
+            autorizado = int(empresa.usuario_id)
             if id_usuario == autorizado:
                 empresa.delete()
                 db.session.commit()
