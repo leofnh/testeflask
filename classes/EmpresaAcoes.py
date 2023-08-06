@@ -73,7 +73,7 @@ class Acoes():
                 "status": 'Erro, acesso negado!',
                 "situacao": 'erro',
                 "usuario": id_usuario,
-                "empresa": id_empresa
+                "empresa": autorizado
             }
             return resp
 
