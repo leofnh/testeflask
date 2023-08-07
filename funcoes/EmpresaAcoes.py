@@ -10,7 +10,7 @@ class Acoes():
             empresa = Empresa.query.get(id_empresa)
             autorizado = int(empresa.usuario_id)
             if id_usuario == autorizado:
-                empresa.delete()
+                db.session.delete(empresa)
                 db.session.commit()
                 resp = {
                     "status": f'Empresa {cnpj} deletada com sucesso!',
@@ -62,14 +62,24 @@ class Acoes():
             try:
                 empresa = Empresa.query.get(id_empresa)
                 if empresa:
-                    empresa.nomeFantasia = nome_fantasia
-                    empresa.cnae = cnae
-                    db.session.commit()
-                    resp = {
-                        "status": 'Empresa atualizada com sucesso!',
-                        "situacao": 'sucesso'
-                    }
-                    return resp
+                    if nome_fantasia or cnae:
+                        if nome_fantasia:
+                            empresa.nomeFantasia = nome_fantasia
+                        if cnae:
+                            empresa.cnae = cnae
+                        db.session.commit()
+                        resp = {
+                            "status": 'Empresa atualizada com sucesso!',
+                            "situacao": 'sucesso'
+                        }
+                        return resp
+                    else:
+                        resp = {
+                            "status": 'Ocorreu um erro, talvez você não preencheu todos os campos! Tente novamente.',
+                            "situacao": 'erro'
+                        }
+                        return resp
+
             except Exception as e:
                 resp = {
                     "status": f'Ocorreu um erro: {e}',
